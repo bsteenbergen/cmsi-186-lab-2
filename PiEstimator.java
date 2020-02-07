@@ -5,31 +5,35 @@ public class PiEstimator {
             if (args.length != 1) {
                 throw new IllegalArgumentException("Exactly one argument required");
             }
-            //
-            // TODO: Parse the command line argument and call your estimate function
-            //
-        } catch (NumberFormatException e) {
-            //
-            // TODO: Take care of a possible non-integer argument.
-            //
-        } catch (IllegalArgumentException e) {
-            //
-            // TODO: Take care of the exception you threw above.
-            //
+
+            int darts = Integer.parseInt(args[0]);
+            System.out.println(estimate(darts));
+        } 
+
+        catch (NumberFormatException e) {
+            System.err.println("Argument must be an integer");
+        } 
+        
+        catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
         }
     }
 
     public static double estimate(int darts) {
-        //
-        // TODO: Do the main work here. I've just returned 0.0 as a place holder
-        // so the code compiles. It isn't right though. Remove the return here and
-        // implement the whole method on your own.
-        //
-        return 0.0;
+
+            if (darts < 1) {
+                throw new IllegalArgumentException("At least one dart required");
+            }
+
+        double dartCount = 0;
+        
+        for (int i = 0; i <= darts; i++) {
+            if (Math.hypot(Math.random(), Math.random()) <= 1) {
+                dartCount++;
+            }
+        }
+
+        return 4.0 * ((double)dartCount)/darts;
     }
 
-    //
-    // Don't be afraid to put in some private "helper" methods. You don't have to, of
-    // course, but they could be useful and keep your code modular.
-    //
 }
